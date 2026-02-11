@@ -1,0 +1,153 @@
+index.html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Be My Valentine 💕</title>
+
+<style>
+    body {
+        margin: 0;
+        padding: 0;
+        font-family: 'Comic Sans MS', cursive;
+        background: linear-gradient(to bottom right, #ff9ecf, #ff4f9a);
+        overflow: hidden;
+        text-align: center;
+        color: white;
+    }
+
+    h1 {
+        margin-top: 100px;
+        font-size: 3em;
+        text-shadow: 2px 2px 5px #ff0066;
+    }
+
+    .buttons {
+        margin-top: 40px;
+        position: relative;
+        height: 300px;
+    }
+
+    button {
+        padding: 15px 30px;
+        font-size: 20px;
+        border: none;
+        border-radius: 30px;
+        cursor: pointer;
+        transition: 0.3s;
+        position: absolute;
+    }
+
+    #yesBtn {
+        background-color: #ff0066;
+        color: white;
+        left: 40%;
+        top: 50%;
+    }
+
+    #yesBtn:hover {
+        transform: scale(1.1);
+    }
+
+    #noBtn {
+        background-color: white;
+        color: #ff0066;
+        left: 55%;
+        top: 50%;
+    }
+
+    /* Popup */
+    .popup {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(255, 0, 102, 0.9);
+        display: none;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        font-size: 4em;
+        z-index: 1000;
+    }
+
+    .balloon {
+        position: absolute;
+        bottom: -100px;
+        width: 40px;
+        height: 60px;
+        background-color: red;
+        border-radius: 50%;
+        animation: floatUp 6s linear infinite;
+        opacity: 0.8;
+    }
+
+    @keyframes floatUp {
+        0% { transform: translateY(0); }
+        100% { transform: translateY(-120vh); }
+    }
+
+    .flowers {
+        font-size: 3em;
+        margin-top: 20px;
+    }
+
+</style>
+</head>
+
+<body>
+
+<h1>Will you be my Valentine? 💕</h1>
+
+<div class="buttons">
+    <button id="yesBtn">Yes 💖</button>
+    <button id="noBtn">No 🙈</button>
+</div>
+
+<div class="popup" id="popup">
+    <div>YAYYY!!! 💕🎉</div>
+    <div class="flowers">🌸🌷🌹🌺🌼</div>
+</div>
+
+<script>
+    const noBtn = document.getElementById("noBtn");
+    const yesBtn = document.getElementById("yesBtn");
+    const popup = document.getElementById("popup");
+
+    // Make NO button run away
+    noBtn.addEventListener("mouseover", function() {
+        const maxX = window.innerWidth - noBtn.offsetWidth;
+        const maxY = window.innerHeight - noBtn.offsetHeight;
+
+        const randomX = Math.random() * maxX;
+        const randomY = Math.random() * maxY;
+
+        noBtn.style.left = randomX + "px";
+        noBtn.style.top = randomY + "px";
+    });
+
+    // YES button click
+    yesBtn.addEventListener("click", function() {
+        popup.style.display = "flex";
+        createBalloons();
+    });
+
+    function createBalloons() {
+        for (let i = 0; i < 20; i++) {
+            const balloon = document.createElement("div");
+            balloon.classList.add("balloon");
+
+            balloon.style.left = Math.random() * 100 + "vw";
+            balloon.style.backgroundColor = 
+                ["#ff0066", "#ff4f9a", "#ffffff", "#ff99cc"][Math.floor(Math.random() * 4)];
+            balloon.style.animationDuration = (Math.random() * 3 + 3) + "s";
+
+            document.body.appendChild(balloon);
+        }
+    }
+</script>
+
+</body>
+</html>
