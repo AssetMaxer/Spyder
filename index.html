@@ -86,13 +86,23 @@ button {
     font-size: 4em;
     z-index: 1000;
 }
+.popup > div:first-child {
+    margin-bottom: auto;
+    margin-top: 40vh;
+}
 .closeBtn {
-    margin-top: 30px;
+    margin-top: auto;
+    margin-bottom: 50px;
     font-size: 20px;
     padding: 10px 20px;
     border-radius: 20px;
     border: none;
     cursor: pointer;
+    background-color: white;
+    color: #ff0066;
+}
+.closeBtn:hover {
+    transform: scale(1.1);
 }
 .balloon {
     position: fixed;
@@ -111,9 +121,11 @@ button {
 </head>
 <body>
 <h1>Will you be my Valentine Zhaoru? 💕</h1>
-<a href="destination.html" class="image-container">
-    <img src="img/IMG_1018.jpg" alt="lol" onerror="this.style.display='none'; this.parentElement.innerHTML='<p style=\'color: white; font-size: 1.2em;\'>💕</p>'">
-</a>
+<div class="image-container">
+    <a href="destination.html">
+        <img src="img/IMG_1018.jpg" alt="Valentine" onerror="this.src='https://via.placeholder.com/250/ff69b4/ffffff?text=💕'">
+    </a>
+</div>
 <div class="buttons">
     <button id="yesBtn">Yes 💖</button>
     <button id="noBtn">No 🙈</button>
