@@ -83,7 +83,7 @@ button {
     justify-content: space-between;
     align-items: center;
     z-index: 1000;
-    padding: 50px 0;
+    padding: 50px 20px;
     box-sizing: border-box;
 }
 .popup-content {
@@ -92,6 +92,7 @@ button {
     align-items: center;
     justify-content: center;
     font-size: 4em;
+    text-align: center;
 }
 .closeBtn {
     font-size: 20px;
@@ -101,7 +102,7 @@ button {
     cursor: pointer;
     background-color: white;
     color: #ff0066;
-    margin-bottom: 0;
+    margin-bottom: 20px;
 }
 .closeBtn:hover {
     transform: scale(1.1);
@@ -133,7 +134,9 @@ button {
     <button id="noBtn">No 🙈</button>
 </div>
 <div class="popup" id="popup">
-    <div class="popup-content">YAYYY!!! 💕🎉</div>
+    <div class="popup-content">
+        <div>YAYYY!!! 💕🎉</div>
+    </div>
     <button class="closeBtn" onclick="closePopup()">Try Again 😏</button>
 </div>
 
