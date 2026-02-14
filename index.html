@@ -3,7 +3,18 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Be My Valentine 💕</title>
+<title>💕</title>
+
+<!-- Open Graph tags to control link preview -->
+<meta property="og:title" content="Click here!" />
+<meta property="og:description" content="I have something for you" />
+<meta property="og:image" content="https://via.placeholder.com/1200x630/ff69b4/ffffff?text=💕" />
+<meta property="og:type" content="website" />
+
+<!-- Twitter Card tags -->
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="Click here!" />
+<meta name="twitter:description" content="I have something for you" />
     
 <style>
 body {
@@ -26,193 +37,3 @@ h1 {
     display: inline-block;
     margin: 20px auto;
     text-decoration: none;
-}
-.image-container img {
-    max-width: 250px;
-    max-height: 250px;
-    width: auto;
-    height: auto;
-    border-radius: 20px;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
-    transition: transform 0.3s;
-    display: block;
-}
-.image-container:hover img {
-    transform: scale(1.05);
-}
-.buttons {
-    margin-top: 30px;
-    margin-bottom: 50px;
-    position: relative;
-    height: 200px;
-    width: 100%;
-}
-button {
-    padding: 15px 30px;
-    font-size: 20px;
-    border: none;
-    border-radius: 30px;
-    cursor: pointer;
-    transition: 0.2s;
-    position: absolute;
-    left: 50%;
-    transform: translateX(-50%);
-}
-#yesBtn {
-    background-color: #ff0066;
-    color: white;
-    top: 50px;
-}
-#yesBtn:hover {
-    transform: translateX(-50%) scale(1.1);
-}
-#noBtn {
-    background-color: white;
-    color: #ff0066;
-    top: 120px;
-}
-.popup {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(255, 0, 102, 0.95);
-    display: none;
-    flex-direction: column;
-    justify-content: space-between;
-    align-items: center;
-    z-index: 1000;
-    padding: 50px 20px;
-    box-sizing: border-box;
-}
-.popup-content {
-    flex: 1;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 4em;
-    text-align: center;
-}
-.closeBtn {
-    font-size: 20px;
-    padding: 10px 20px;
-    border-radius: 20px;
-    border: none;
-    cursor: pointer;
-    background-color: white;
-    color: #ff0066;
-    margin-bottom: 20px;
-}
-.closeBtn:hover {
-    transform: scale(1.1);
-}
-.balloon {
-    position: fixed;
-    bottom: -100px;
-    width: 40px;
-    height: 60px;
-    border-radius: 50%;
-    animation: floatUp 6s linear infinite;
-    opacity: 0.8;
-}
-@keyframes floatUp {
-    0% { transform: translateY(0); }
-    100% { transform: translateY(-120vh); }
-}
-</style>
-</head>
-<body>
-<h1>Will you be my Valentine Zhaoru? 💕</h1>
-
-<a href="destination.html" class="image-container">
-    <img id="mainImage" src="IMG_1018.jpg" alt="Valentine Picture">
-</a>
-
-<div class="buttons">
-    <button id="yesBtn">Yes 💖</button>
-    <button id="noBtn">No 🙈</button>
-</div>
-<div class="popup" id="popup">
-    <div class="popup-content">
-        <div>YAYYY!!! 💕🎉</div>
-    </div>
-    <button class="closeBtn" onclick="closePopup()">Try Again 😏</button>
-</div>
-
-<script>
-const noBtn = document.getElementById("noBtn");
-const yesBtn = document.getElementById("yesBtn");
-const popup = document.getElementById("popup");
-const mainImage = document.getElementById("mainImage");
-
-// Debug image loading
-mainImage.onload = function() {
-    console.log("Image loaded successfully!");
-};
-
-mainImage.onerror = function() {
-    console.error("Image failed to load. Trying alternative paths...");
-    const alternatives = [
-        "./IMG_1018.jpg",
-        "IMG_1018.JPG",
-        "./IMG_1018.JPG",
-        "IMG_1018.jpeg",
-        "IMG_1018.png"
-    ];
-    
-    let index = 0;
-    const tryNext = () => {
-        if (index < alternatives.length) {
-            console.log("Trying: " + alternatives[index]);
-            mainImage.src = alternatives[index];
-            index++;
-        } else {
-            console.error("All image paths failed");
-            mainImage.style.display = "none";
-        }
-    };
-    
-    mainImage.onerror = tryNext;
-    tryNext();
-};
-
-// CONSTANTLY RUNNING NO BUTTON
-function moveButton() {
-    const maxX = window.innerWidth - noBtn.offsetWidth - 20;
-    const maxY = window.innerHeight - noBtn.offsetHeight - 20;
-    const randomX = Math.max(20, Math.random() * maxX);
-    const randomY = Math.max(20, Math.random() * maxY);
-    noBtn.style.left = randomX + "px";
-    noBtn.style.top = randomY + "px";
-    noBtn.style.transform = "none";
-}
-setInterval(moveButton, 700);
-
-// YES CLICK
-yesBtn.addEventListener("click", function() {
-    popup.style.display = "flex";
-    createBalloons();
-});
-
-// CLOSE POPUP
-function closePopup() {
-    popup.style.display = "none";
-    document.querySelectorAll(".balloon").forEach(b => b.remove());
-}
-
-// BALLOONS
-function createBalloons() {
-    for (let i = 0; i < 20; i++) {
-        const balloon = document.createElement("div");
-        balloon.classList.add("balloon");
-        balloon.style.left = Math.random() * 100 + "vw";
-        balloon.style.backgroundColor =
-            ["#ff0066", "#ff4f9a", "#ffffff", "#ff99cc"][Math.floor(Math.random() * 4)];
-        balloon.style.animationDuration = (Math.random() * 3 + 3) + "s";
-        document.body.appendChild(balloon);
-    }
-}
-</script>
-</body>
-</html>
