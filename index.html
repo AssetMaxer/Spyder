@@ -23,7 +23,7 @@ h1 {
     margin-bottom: 20px;
 }
 .image-container {
-    display: block;
+    display: inline-block;
     margin: 20px auto;
     text-decoration: none;
 }
@@ -36,9 +36,8 @@ h1 {
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
     transition: transform 0.3s;
     display: block;
-    margin: 0 auto;
 }
-.image-container img:hover {
+.image-container:hover img {
     transform: scale(1.05);
 }
 .buttons {
@@ -122,12 +121,10 @@ button {
 <body>
 <h1>Will you be my Valentine Zhaoru? 💕</h1>
 
-
 <a href="destination.html" class="image-container">
-    <img src="IMG_1018.jpg" alt="lol" onerror="this.style.display='none';">
+    <img id="mainImage" src="IMG_1018.jpg" alt="Valentine Picture">
 </a>
-    
-</div>
+
 <div class="buttons">
     <button id="yesBtn">Yes 💖</button>
     <button id="noBtn">No 🙈</button>
@@ -141,6 +138,38 @@ button {
 const noBtn = document.getElementById("noBtn");
 const yesBtn = document.getElementById("yesBtn");
 const popup = document.getElementById("popup");
+const mainImage = document.getElementById("mainImage");
+
+// Debug image loading
+mainImage.onload = function() {
+    console.log("Image loaded successfully!");
+};
+
+mainImage.onerror = function() {
+    console.error("Image failed to load. Trying alternative paths...");
+    const alternatives = [
+        "./IMG_1018.jpg",
+        "IMG_1018.JPG",
+        "./IMG_1018.JPG",
+        "IMG_1018.jpeg",
+        "IMG_1018.png"
+    ];
+    
+    let index = 0;
+    const tryNext = () => {
+        if (index < alternatives.length) {
+            console.log("Trying: " + alternatives[index]);
+            mainImage.src = alternatives[index];
+            index++;
+        } else {
+            console.error("All image paths failed");
+            mainImage.style.display = "none";
+        }
+    };
+    
+    mainImage.onerror = tryNext;
+    tryNext();
+};
 
 // CONSTANTLY RUNNING NO BUTTON
 function moveButton() {
